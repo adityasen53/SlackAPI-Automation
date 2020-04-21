@@ -7,11 +7,9 @@ CreateChannelURL = "https://slack.com/api/channels.create"
 file = open("C:\\Users\\adsen\\PycharmProjects\\AdityaPython\\json_inputs\\CreateChannel.json","r")
 json_input = file.read()
 requests_json = json.loads(json_input)
-#post request with json input
 response = requests.post(CreateChannelURL,requests_json)
 response_obj = json.loads(response.text)
 id = response_obj["channel"]["id"]
-print(id)
 old_name = response_obj["channel"]["name"]
 print("Channel name before using Rename API: ",old_name)
 
@@ -29,23 +27,20 @@ response_obj2 = json.loads(response2.text)
 new_name = response_obj2["channel"]["name"]
 print("Channel name after using Rename API: ",new_name)
 
-#List all the channels
+#4. List all the channels
 
 ChannelListURL = "https://slack.com/api/channels.list"
-f = open("C:\\Users\\adsen\\PycharmProjects\\AdityaPython\\json_inputs\\RenameChannel.json","r")
-requests_json1 = json.loads(f.read())
 response3 =  requests.get(ChannelListURL,requests_json1)
 channel_list = json.loads(response3.text)
-#for names in channel_list[channels]:
-  # print(names["name"])
 
-#print(type(channel_list)
-
-#Archive the channel
+#5 Archive the channel
 
 ArchiveChannelURL = "https://slack.com/api/conversations.archive"
 response4 = requests.post(ArchiveChannelURL,requests_json1)
 print("Channel is archived", response4.text)
+
+#6 Validate if the Channel is archived successfully
+
 response4 = requests.post(ArchiveChannelURL,requests_json1)
 print("Channel is already archived", response4.text)
 
